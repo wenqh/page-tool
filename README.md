@@ -5,7 +5,7 @@
         "y1": 46,
         "y2": 1625,
         "duration": 100,
-        "mark": null
+        "mark1": null
     },
     "com.android.chrome": {
         "y1": 152
