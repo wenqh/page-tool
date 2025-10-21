@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnAccessibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动辅助翻页服务"/>
+
+    <EditText
+        android:id="@+id/editTextJson"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="请输入配置 JSON"
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
+        android:minLines="10"
+        android:maxLines="50"
+        android:scrollbars="vertical"
+        android:overScrollMode="always" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="保存配置" />
+</LinearLayout>
