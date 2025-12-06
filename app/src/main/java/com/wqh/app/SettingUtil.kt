@@ -29,8 +29,8 @@ object SettingUtil {
 
     fun getAppCfg(packageName: String?, className: String?): AppCfg {
         val cfg = mergeConfigs(data.optJSONObject("*"), data.optJSONObject(packageName), data.optJSONObject(className))
-        return if(cfg.getString("scroll") != "GESTURE") AppCfg(cfg.getString("scroll"), Float.NaN, Float.NaN, Float.NaN, 0)
-                else AppCfg(cfg.getString("scroll"), cfg.optDouble("y1").toFloat(), cfg.optDouble("y2").toFloat(), cfg.optDouble("mark1").toFloat(), cfg.optLong("duration"))
+        return if(cfg.getString("mode") != "GESTURE") AppCfg(cfg.getString("mode"), Float.NaN, Float.NaN, Float.NaN, 0)
+                else AppCfg(cfg.getString("mode"), cfg.optDouble("y1").toFloat(), cfg.optDouble("y2").toFloat(), cfg.optDouble("mark1").toFloat(), cfg.optLong("duration"))
     }
     private fun mergeConfigs(vararg configs: JSONObject?): JSONObject {
         val result = JSONObject()
@@ -43,5 +43,5 @@ object SettingUtil {
         }
         return result
     }
-    data class AppCfg(val scroll: String, val y1: Float, val y2: Float, val mark1: Float, val duration: Long)
+    data class AppCfg(val mode: String, val y1: Float, val y2: Float, val mark1: Float, val duration: Long)
 }

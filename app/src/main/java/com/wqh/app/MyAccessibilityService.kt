@@ -63,9 +63,13 @@ class MyAccessibilityService : AccessibilityService() {
     fun scrollApp(up: Boolean) {
         appCfg = SettingUtil.getAppCfg(currentPackageName, currentClassName)
 
-        if (appCfg.scroll == "ACTION") {
+        if (appCfg.mode == "ACTION") {
             val action = if (up) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
             findScrollableNodeRecursive(rootInActiveWindow, action)?.performAction(action)
+            return
+        }
+        if(appCfg.mode = "KEY") {
+            runCatching { Runtime.getRuntime().exec("su -c input keyevent " + (if (next) 93 else 92)) }.onFailure { it.printStackTrace() }
             return
         }
 
