@@ -68,7 +68,7 @@ class MyAccessibilityService : AccessibilityService() {
             findScrollableNodeRecursive(rootInActiveWindow, action)?.performAction(action)
             return
         }
-        if(appCfg.mode = "KEY") {
+        if(appCfg.mode == "KEY") {
             runCatching { Runtime.getRuntime().exec("su -c input keyevent " + (if (next) 93 else 92)) }.onFailure { it.printStackTrace() }
             return
         }
