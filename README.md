@@ -1,7 +1,7 @@
 ```json
 {
     "*": {
-        "scroll": "GESTURE",
+        "mode": "GESTURE",
         "y1": 46,
         "y2": 1625,
         "duration": 100,
