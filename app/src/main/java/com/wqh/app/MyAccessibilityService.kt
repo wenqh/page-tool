@@ -69,7 +69,7 @@ class MyAccessibilityService : AccessibilityService() {
             return
         }
         if(appCfg.mode == "KEY") {
-            runCatching { Runtime.getRuntime().exec("su -c input keyevent " + (if (next) 93 else 92)) }.onFailure { it.printStackTrace() }
+            runCatching { Runtime.getRuntime().exec("su -c input keyevent " + (if (up) 93 else 92)) }.onFailure { it.printStackTrace() }
             return
         }
 
