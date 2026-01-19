@@ -2,7 +2,6 @@ package com.wqh.app
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.GestureDescription
-import android.app.Service
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -21,7 +20,7 @@ import android.view.WindowManager
 import kotlin.math.abs
 
 
-class FloatingService : Service() {
+class FloatingView(private val context: MyAccessibilityService)/*Service : Service()*/ {
 
     private lateinit var windowManager: WindowManager
     private lateinit var floatingView1: MyOverlayView
@@ -35,14 +34,15 @@ class FloatingService : Service() {
     private var simulatedFlag = false
     private var multiTouch = false
 
-    override fun onCreate() {
-        super.onCreate()
+    //override fun onCreate() {
+    fun init() {
+        //super.onCreate()
 
-        floatingView1 = MyOverlayView(this)
-        floatingView2 = MyOverlayView(this)
+        floatingView1 = MyOverlayView(context)
+        floatingView2 = MyOverlayView(context)
         floatingView1.setBackgroundColor(Color.TRANSPARENT) // 完全透明
         floatingView2.setBackgroundColor(Color.TRANSPARENT) // 完全透明
-//        floatingView.setBackgroundColor(0x22000000) // 半透明
+        //floatingView.setBackgroundColor(0x22000000) // 半透明
         /*floatingView.background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
             setColor(Color.TRANSPARENT)
@@ -50,7 +50,7 @@ class FloatingService : Service() {
         }*/
 
         val layoutParams1 = WindowManager.LayoutParams().apply {
-            type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            type = WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
             format = PixelFormat.TRANSLUCENT
             width = 50 // 宽度：边缘触发区域
             height = WindowManager.LayoutParams.MATCH_PARENT
@@ -61,7 +61,7 @@ class FloatingService : Service() {
             gravity = Gravity.START or Gravity.CENTER_VERTICAL
         }
         val layoutParams2 = WindowManager.LayoutParams().apply {
-            type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            type = WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
             format = PixelFormat.TRANSLUCENT
             width = 50 // 宽度：边缘触发区域
             height = WindowManager.LayoutParams.MATCH_PARENT
@@ -72,7 +72,7 @@ class FloatingService : Service() {
             gravity = Gravity.END or Gravity.CENTER_VERTICAL
         }
 
-        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView1, layoutParams1)
         windowManager.addView(floatingView2, layoutParams2)
 
@@ -106,7 +106,7 @@ class FloatingService : Service() {
                         //发送点击事件结束后恢复悬浮窗
                         Handler(Looper.getMainLooper()).postDelayed({
                             simulatedFlag = true
-                            MyAccessibilityService.instance?.dispatchGesture(
+                            context.dispatchGesture(
                                 GestureDescription.Builder()
                                     .addStroke(GestureDescription.StrokeDescription(
                                         Path().apply { moveTo(e.rawX, e.rawY) }, 0, 50)).build(),
@@ -125,17 +125,17 @@ class FloatingService : Service() {
                         v.performClick()
                     } else if(dy > touchSlop && dy > dx) {
                         if(multiTouch && e.rawY > startY) {
-                            MyAccessibilityService.instance?.performGlobalAction(AccessibilityService.GLOBAL_ACTION_TAKE_SCREENSHOT)
+                            context.performGlobalAction(AccessibilityService.GLOBAL_ACTION_TAKE_SCREENSHOT)
                             return@OnTouchListener true
                         }
-                        MyAccessibilityService.instance?.scrollApp(e.rawY <= startY)
-                        MyAccessibilityService.instance?.appCfg?.apply {
+                        context.scrollApp(e.rawY <= startY)
+                        context.appCfg.apply {
                             floatingView1.redraw(if (!mark1.isNaN()) mark1 else y1, y2)
                             floatingView2.redraw(if (!mark1.isNaN()) mark1 else y1, y2)
                         }
                     } else if (SystemClock.uptimeMillis() - actionDownTime >= 3000L/*500*/) {
-                        copyTextToClipboard(MyAccessibilityService.instance?.currentPackageName + "\n"
-                                + MyAccessibilityService.instance?.currentClassName +"\n" + e.rawY.toInt())
+                        copyTextToClipboard(context.currentPackageName + "\n"
+                                + context.currentClassName +"\n" + e.rawY.toInt())
                         floatingView1.redraw(e.y, null)
 
                         //换位
@@ -220,17 +220,17 @@ class FloatingService : Service() {
         floatingView2.setOnTouchListener(touchListener)
     }
 
-    override fun onDestroy() {
+    /*override fun onDestroy() {
         super.onDestroy()
         windowManager.removeView(floatingView1)
         windowManager.removeView(floatingView2)
     }
 
-    override fun onBind(intent: Intent?): IBinder? = null
+    override fun onBind(intent: Intent?): IBinder? = null*/
 
 
     private fun copyTextToClipboard(textToCopy: String, label: String = "文本内容") {
-        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clipData = ClipData.newPlainText(label, textToCopy)
         clipboardManager.setPrimaryClip(clipData)
     }

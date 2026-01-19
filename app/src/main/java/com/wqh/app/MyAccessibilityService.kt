@@ -31,7 +31,9 @@ class MyAccessibilityService : AccessibilityService() {
         Log.i(null, "无障碍服务已连接")
 
         SettingUtil.load(this)
-        startService(Intent(this, FloatingService::class.java))
+        //startService(Intent(this, FloatingService::class.java))
+        val floatingService = FloatingView(this)
+        floatingService.init()
 
         /*
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager

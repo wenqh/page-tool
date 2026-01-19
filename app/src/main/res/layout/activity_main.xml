@@ -13,7 +13,7 @@
         android:id="@+id/btnAccessibility"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="启动辅助翻页服务"/>
+        android:text="开启无障碍服务"/>
 
     <EditText
         android:id="@+id/editTextJson"

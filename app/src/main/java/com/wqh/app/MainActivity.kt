@@ -27,12 +27,12 @@ class MainActivity : Activity() {
         val context = this@MainActivity
 
         btnAccessibility.setOnClickListener {
-            if (!Settings.canDrawOverlays(context)) {
+            /*if (!Settings.canDrawOverlays(context)) {
                 Toast.makeText(context, "请先授予悬浮窗权限", Toast.LENGTH_SHORT).show()
                 val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
                 startActivity(intent)
                 return@setOnClickListener
-            }
+            }*/
 
             if (!isAccessibilityServiceEnabled(context, MyAccessibilityService::class.java)) {
                 Toast.makeText(context, "请开启无障碍权限", Toast.LENGTH_SHORT).show()
@@ -40,13 +40,13 @@ class MainActivity : Activity() {
                 return@setOnClickListener
             }
 
-            startService(Intent(context, FloatingService::class.java))
+            //startService(Intent(context, FloatingService::class.java))
             Toast.makeText(context, "服务已启动", Toast.LENGTH_SHORT).show()
             btnAccessibility.text = "服务已启动"
         }
 
         // 初始显示当前配置
-        cfgEditText.setText(SettingUtil.data?.toString(4) ?: "")
+        cfgEditText.setText(SettingUtil.data.toString(4) ?: "")
         btnSave.setOnClickListener {
             try {
                 val jsonText = JSONObject(cfgEditText.text.toString().trim()).toString(4)
