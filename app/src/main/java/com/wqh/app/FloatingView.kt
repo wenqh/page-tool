@@ -28,7 +28,7 @@ class FloatingView(private val context: MyAccessibilityService)/*Service : Servi
 
     private var startX = 0f
     private var startY = 0f
-    private val touchSlop = 15f // 滑动判定阈值
+    private val touchSlop = 50f // 滑动判定阈值
     private var actionDownTime = 0L
 
     private var simulatedFlag = false
