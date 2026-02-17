@@ -3,49 +3,41 @@
     "*": {
         "mode": "GESTURE",
         "y1": 46,
-        "y2": 1625,
+        "y2": 1602,
         "duration": 100,
         "mark1": null
     },
     "com.android.chrome": {
-        "y1": 152,
-        "y2": 1587
+        "y1": 152
     },
     "com.tencent.mm": {
         "y1": 144,
-        "y2": 1532,
+        "y2": 1487,
         "duration": 150
     },
     "mark.via.gp": {
-        "y11": 135,
-        "y1": 144
+        "y1": 250
     },
     "com.google.android.youtube": {
         "duration": 800
     },
     "com.openai.chatgpt": {
-        "y11111111": 165,
-        "y2": 1466
+        "y1": 130,
+        "y2": 1470
     },
     "com.spotify.music": {
         "y1": 150,
-        "y2": 1431
+        "y2": 1386
     },
     "com.guozhigq.pilipala": {
-        "y1": 315,
-        "duration": 300
+        "duration": 250
     },
     "com.example.c001apk.compose": {
         "y1": 257
     },
-    "com.example.c001apk.flutter": {
-        "y1": 150,
-        "y2": 1497,
-        "duration": 600
-    },
     "com.huanchengfly.tieba.post": {
-        "y1": 273,
-        "y2": 1514
+        "y1": 240,
+        "y2": 1527
     },
     "org.telegram.messenger": {
         "y1": 244,
