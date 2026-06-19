@@ -27,17 +27,22 @@
     },
     "com.spotify.music": {
         "y1": 150,
-        "y2": 1386
+        "y2": 1370
     },
     "com.guozhigq.pilipala": {
         "duration": 250
     },
     "com.example.c001apk.compose": {
-        "y1": 257
+        "y1": 257,
+        "y2": 1452
     },
     "com.huanchengfly.tieba.post": {
         "y1": 240,
         "y2": 1527
+    },
+    "com.a10miaomiao.bilimiao": {
+        "y1": 135,
+        "y2": 1470
     },
     "org.telegram.messenger": {
         "y1": 244,
