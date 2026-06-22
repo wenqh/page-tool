@@ -28,7 +28,7 @@ class FloatingView(private val context: MyAccessibilityService)/*Service : Servi
 
     private var startX = 0f
     private var startY = 0f
-    private val touchSlop = 50f // 滑动判定阈值
+    private val touchSlop = 15f // 点击判定阈值
     private var actionDownTime = 0L
 
     private var simulatedFlag = false
@@ -123,7 +123,7 @@ class FloatingView(private val context: MyAccessibilityService)/*Service : Servi
                                 }, null
                             )}, 70)
                         v.performClick()
-                    } else if(dy > touchSlop && dy > dx) {
+                    } else if(dy > 150 && dy > dx) {
                         if(multiTouch && e.rawY > startY) {
                             context.performGlobalAction(AccessibilityService.GLOBAL_ACTION_TAKE_SCREENSHOT)
                             return@OnTouchListener true
