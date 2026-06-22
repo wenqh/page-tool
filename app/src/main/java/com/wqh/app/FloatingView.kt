@@ -123,7 +123,7 @@ class FloatingView(private val context: MyAccessibilityService)/*Service : Servi
                                 }, null
                             )}, 70)
                         v.performClick()
-                    } else if(dy > 150 && dy > dx) {
+                    } else if(dy > 100 && dy > dx) {
                         if(multiTouch && e.rawY > startY) {
                             context.performGlobalAction(AccessibilityService.GLOBAL_ACTION_TAKE_SCREENSHOT)
                             return@OnTouchListener true
